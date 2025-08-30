@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us — Numera</title>
+  <meta name="description" content="Get in touch with Numera 360 for accounting, compliance, and HR support." />
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+  <div class="brand-bar" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html#home" aria-label="Numera home">
+        <img src="images/logo.png" alt="Numera logo" />
+        <span>Numera 360 Private Limited</span>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="services.html">Our Services</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html" class="active">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Top band -->
+  <section class="ct-hero">
+    <div class="container">
+      <h1>Contact Us</h1>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="ct-map-embed" aria-label="Office location on map">
+    <iframe
+      title="Map to 502/09, Co-operative Road, Panagoda, Homagama"
+      src="https://www.google.com/maps?q=502/09%20Co-operative%20Road,%20Panagoda,%20Homagama&output=embed"
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </section>
+
+  <!-- Form + Info -->
+  <section class="ct-section">
+    <div class="container ct-grid">
+      <!-- Left: form -->
+      <form class="ct-form" action="#" method="post" novalidate>
+        <div class="ct-field">
+          <label class="sr-only" for="ct-name">Name</label>
+          <input class="ct-input" type="text" id="ct-name" name="name" placeholder="Name" required />
+        </div>
+
+        <div class="ct-field">
+          <label class="sr-only" for="ct-email">Email</label>
+          <input class="ct-input" type="email" id="ct-email" name="email" placeholder="E-mail" required />
+        </div>
+
+        <div class="ct-field">
+          <label class="sr-only" for="ct-message">Message</label>
+          <textarea class="ct-textarea" id="ct-message" name="message" placeholder="Message" rows="6" required></textarea>
+        </div>
+
+        <button class="ct-submit" type="submit">Send</button>
+      </form>
+
+      <!-- Right: contact card -->
+      <aside class="ct-info" aria-label="Contact information">
+        <ul class="ct-list">
+          <li class="ct-list-item">{%PHONE%} <a href="tel:0702518717">0702 518 717</a></li>
+          <li class="ct-list-item">{%PIN%} 502/09, Co-operative Road, Panagoda, Homagama</li>
+          <li class="ct-list-item">{%MAIL%} <a href="hello@numera360.com">hello@numera360.com</a></li>
+        </ul>
+        <p class="ct-note">
+          We typically respond within one business day. Share a brief summary of your needs,
+          and our team will get back to you with next steps.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <ul class="footer-nav">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="services.html">Our Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="socials" aria-label="Social links">
+          <a href="#" aria-label="Facebook" class="social-icon">{%FACEBOOK%}</a>
+          <a href="#" aria-label="Instagram" class="social-icon">{%INSTAGRAM%}</a>
+          <a href="#" aria-label="X" class="social-icon">{%X%}</a>
+          <a href="#" aria-label="YouTube" class="social-icon">{%YOUTUBE%}</a>
+        </div>
+      </div>
+
+      <div class="footer-col contact-block">
+        <p class="contact-line">{%PHONE%} <a href="tel:0702518717">0702 518 717</a></p>
+        <p class="contact-line">{%PIN%} 502/09, Co-operative Road, Panagoda, Homagama</p>
+        <p class="contact-line">{%MAIL%} <a href="hello@numera360.com">hello@numera360.com</a></p>
+      </div>
+
+      <div class="footer-col map">
+        <iframe title="Map to 502/09, Co-operative Road, Panagoda, Homagama"
+                src="https://www.google.com/maps?q=502/09%20Co-operative%20Road,%20Panagoda,%20Homagama&output=embed"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">© <span id="year"></span> Numera. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

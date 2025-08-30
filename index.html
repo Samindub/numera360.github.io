@@ -1,96 +1,235 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Site Under Maintenance | Numera360</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-      color: #2f2f2f;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .card {
-      background: #ffffff;
-      padding: 40px 30px;
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .logo {
-      width: 120px;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 15px;
-      color: #0077cc;
-    }
-
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
-
-    .contact {
-      font-size: 16px;
-      color: #555;
-    }
-
-    .contact a {
-      color: #0077cc;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .contact a:hover {
-      text-decoration: underline;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Numera</title>
+  <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
-  <div class="card">
-    <!-- Replaced with your actual logo -->
-    <img src="numera.png" alt="Numera360 Logo" class="logo" />
+  <div class="brand-bar" aria-hidden="true"></div>
 
-    <h1>We'll Be Back Soon</h1>
-    <p>We’re doing some updates to give you a better experience.<br />
-      Our site will be live again shortly. Thank you for your patience!</p>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#home" aria-label="Numera home">
+        <img src="images/logo.png" alt="Numera logo" />
+        <span>Numera 360 Private Limited</span>
+      </a>
 
-    <div class="contact">
-      📧 <a href="mailto:hello@numera360.com">hello@numera360.com</a><br />
-      📱 <a href="https://wa.me/94717071829" target="_blank">+94 71 70 71 829</a>
-      📱 <a href="https://wa.me/94112751144" target="_blank">+94 11 275 11 44</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a href="index.html" class="active">Home</a>
+        <a href="services.html">Our Services</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Slider (caption removed) -->
+  <section id="home" class="hc-hero">
+    <div class="hc-slider">
+      <input class="hc-radio" type="radio" name="homeSlider" id="home-1" checked>
+      <label class="hc-tab" for="home-1" style="--hue: 210"></label>
+      <div class="hc-slide" style="--z:4">
+        <img src="images/hero-1.jpg" alt="">
+      </div>
+
+      <input class="hc-radio" type="radio" name="homeSlider" id="home-2">
+      <label class="hc-tab" for="home-2" style="--hue: 32"></label>
+      <div class="hc-slide" style="--z:3">
+        <img src="images/hero-2.jpg" alt="">
+      </div>
+
+      <input class="hc-radio" type="radio" name="homeSlider" id="home-3">
+      <label class="hc-tab" for="home-3" style="--hue: 82"></label>
+      <div class="hc-slide" style="--z:2">
+        <img src="images/hero-3.jpg" alt="">
+      </div>
+
+      <div class="hc-controls">
+        <label class="hc-tab" for="home-1" style="--hue: 210"></label>
+        <label class="hc-tab" for="home-2" style="--hue: 32"></label>
+        <label class="hc-tab" for="home-3" style="--hue: 82"></label>
+      </div>
+    </div>
+  </section>
+<!-- Stats / Counters -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat">
+      <div class="stat-number" data-target="1000">0</div>
+      <div class="stat-label">+ Projects Done</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" data-target="750">0</div>
+      <div class="stat-label">+ Clients Worked With</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" data-target="2000">0</div>
+      <div class="stat-label">+ Testimonials</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number" data-target="100">0</div>
+      <div class="stat-label">% Satisfaction</div>
     </div>
   </div>
+</section>
+  <!-- Why choose us -->
+  <section class="split" id="why">
+    <div class="container split-grid">
+      <div class="split-media">
+        <img src="images/team-whiteboard.jpg" alt="Team planning on a whiteboard" />
+      </div>
+      <div class="split-card">
+        <h2>Why Choose Us?</h2>
+        <ul class="bullets">
+          <li>Experienced professionals in finance, compliance, and HR</li>
+          <li>Client-focused and customized service delivery</li>
+          <li>Up-to-date with latest regulatory and industry practices</li>
+          <li>Transparent pricing and flexible service models</li>
+          
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- We handle -->
+  <section class="split alt" id="services">
+    <div class="container split-grid">
+      <div class="split-card">
+        <h2>We handle:</h2>
+        <ul class="bullets">
+          <li> Accounting and Bookkeeping Services</li>
+          <li>Taxation Services</li>
+          <li>Company Secretarial Services</li>
+          <li>HR & Payroll Management</li>
+		   <li>Statutory compliance (EPF, ETF, PAYE/APIT, etc.)</li>
+          <li>ERP Solutions</li>
+        </ul>
+      </div>
+      <div class="split-media">
+        <img src="images/boardroom.jpg" alt="Boardroom discussion" />
+      </div>
+    </div>
+  </section>
+
+<!-- Services Marquee (transparent, captions under SVGs) -->
+<section class="svc-marquee-hero" aria-labelledby="svc-title">
+  <div class="container">
+    <h2 id="svc-title" class="svc-marquee-title">Compliance & Regulatory
+</h2>
+  </div>
+
+  <div class="svc-marquee">
+    <div class="svc-track" style="--svc-speed: 22s">
+      <!-- Sequence A -->
+      <figure class="svc-item">
+        <div class="logo-wrap">
+          <img src="images/svc-1.png" alt="Accounting Services">
+        </div>
+        <figcaption>Sole Proprietorships
+</figcaption>
+      </figure>
+
+      <figure class="svc-item">
+        <div class="logo-wrap">
+          <img src="images/svc-2.png" alt="Company Registration">
+        </div>
+        <figcaption>Partnership Firms</figcaption>
+      </figure>
+
+      <figure class="svc-item">
+        <div class="logo-wrap">
+          <img src="images/svc-3.png" alt="HR & Payroll">
+        </div>
+        <figcaption>Personal Businesses</figcaption>
+      </figure>
+
+      <figure class="svc-item">
+        <div class="logo-wrap">
+          <img src="images/svc-4.png" alt="Compliance & Regulatory">
+        </div>
+        <figcaption>Registered Companies
+</figcaption>
+      </figure>
+
+      <!-- Sequence B (duplicate for seamless loop) -->
+      <figure class="svc-item" aria-hidden="true">
+        <div class="logo-wrap"><img src="images/svc-5.png" alt=""></div>
+        <figcaption>Payroll and VAT obligations</figcaption>
+      </figure>
+
+      <figure class="svc-item" aria-hidden="true">
+        <div class="logo-wrap"><img src="images/svc-6.png" alt=""></div>
+        <figcaption>Financial reporting standards</figcaption>
+      </figure>
+
+  
+      </figure>
+    </div>
+  </div>
+</section>
+
+  <!-- CTA -->
+  <section class="partners" id="about">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-media">
+          <img src="images/meeting.jpg" alt="">
+        </div>
+        <div class="cta-body">
+          <h3>Well Trained Team</h3>
+          <p>Experienced professionals in finance, compliance, and HR. Client-focused and customized service delivery.</p>
+          <a href="#contact" class="btn">More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <ul class="footer-nav">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Our Services</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+        <div class="socials">
+          <a href="#" aria-label="Facebook" class="social-icon">{%FACEBOOK%}</a>
+          <a href="#" aria-label="Instagram" class="social-icon">{%INSTAGRAM%}</a>
+          <a href="#" aria-label="X" class="social-icon">{%X%}</a>
+          <a href="#" aria-label="YouTube" class="social-icon">{%YOUTUBE%}</a>
+        </div>
+      </div>
+
+      <div class="footer-col contact-block">
+        <p class="contact-line">{%PHONE%} <a href="tel:0702518717">0702 518 717</a></p>
+        <p class="contact-line">{%PIN%} 502/09, Co-operative Road, Panagoda, Homagama</p>
+        <p class="contact-line">{%MAIL%} <a href="hello@numera360.com">hello@numera360.com</a></p>
+      </div>
+
+      <div class="footer-col map">
+        <iframe title="Map to 502/09, Co-operative Road, Panagoda, Homagama"
+                src="https://www.google.com/maps?q=502/09%20Co-operative%20Road,%20Panagoda,%20Homagama&output=embed"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="container">© <span id="year"></span> Numera. All rights reserved. Designed & developed by iDesigners</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
-
