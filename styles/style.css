@@ -382,3 +382,31 @@ section{padding:80px 0}
   .inv-preview-wrap{position:absolute;left:0;top:0;width:100%;padding:0;background:#fff}
   .inv-preview{box-shadow:none;max-width:100%}
 }
+
+/* ---------- Sri Lanka VAT Tax Invoice (IRD Gazette 2463/05 - 17.11.2025) ---------- */
+.tpl-slvat{padding:48px 50px;font:13px var(--sans);color:#111}
+.tpl-slvat .sl-title{text-align:center;background:var(--navy);color:#fff;padding:12px 18px;font-family:var(--serif);font-size:26px;letter-spacing:.18em;font-weight:700;text-transform:uppercase;border-bottom:4px solid var(--gold);margin-bottom:22px}
+.tpl-slvat .sl-parties{display:grid;grid-template-columns:1fr 1fr;gap:24px;border:1px solid #222;margin-bottom:18px}
+.tpl-slvat .sl-parties > div{padding:14px 16px;font-size:12.5px;line-height:1.55}
+.tpl-slvat .sl-parties > div + div{border-left:1px solid #222}
+.tpl-slvat .sl-parties h4{margin:0 0 8px;font-family:var(--sans);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:700}
+.tpl-slvat .sl-parties strong{font-size:14px;color:var(--navy);display:block;margin-bottom:4px}
+.tpl-slvat .sl-parties .tin{font-weight:700;color:#000}
+.tpl-slvat .sl-meta{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #222;border-top:none;margin-bottom:0}
+.tpl-slvat .sl-meta div{padding:8px 14px;border-top:1px solid #222;font-size:12.5px}
+.tpl-slvat .sl-meta div:nth-child(odd){border-right:1px solid #222;background:#faf8f2}
+.tpl-slvat .sl-meta strong{color:var(--navy);display:inline-block;min-width:140px}
+.tpl-slvat table.sl-items{width:100%;border-collapse:collapse;margin-top:18px;border:1px solid #222}
+.tpl-slvat table.sl-items th{background:var(--navy);color:#fff;padding:10px 8px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;border:1px solid #222;text-align:center}
+.tpl-slvat table.sl-items td{padding:10px 8px;border:1px solid #444;font-size:12.5px;vertical-align:top}
+.tpl-slvat table.sl-items td.num{text-align:right;font-variant-numeric:tabular-nums}
+.tpl-slvat table.sl-items td.ref,.tpl-slvat table.sl-items td.qty{text-align:center}
+.tpl-slvat table.sl-items tfoot td{font-weight:700;background:#faf8f2}
+.tpl-slvat table.sl-items tfoot tr.grand td{background:var(--navy);color:#fff;font-size:14px}
+.tpl-slvat .sl-foot{border:1px solid #222;border-top:none;padding:10px 14px;font-size:12.5px}
+.tpl-slvat .sl-foot div{padding:4px 0}
+.tpl-slvat .sl-foot strong{color:var(--navy);display:inline-block;min-width:160px}
+.tpl-slvat .sl-stamp{position:absolute;right:30px;top:30px;border:2px solid var(--gold);color:var(--gold);padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;transform:rotate(-8deg);opacity:.85}
+.tpl-slvat{position:relative}
+.tpl-slvat .sl-notice{margin-top:14px;font-size:10.5px;color:#666;text-align:center;font-style:italic}
+@media print{.tpl-slvat{padding:24px}}

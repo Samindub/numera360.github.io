@@ -62,17 +62,29 @@
         <label><input type="radio" name="tpl" value="classic" /><span>Classic</span></label>
         <label><input type="radio" name="tpl" value="minimal" /><span>Minimal</span></label>
         <label><input type="radio" name="tpl" value="branded" /><span>Branded</span></label>
+        <label><input type="radio" name="tpl" value="slvat" /><span>🇱🇰 SL VAT</span></label>
       </div>
+      <p style="font-size:12px;color:var(--muted);margin:-4px 0 14px">
+        <strong>SL VAT</strong> follows the Inland Revenue Department of Sri Lanka format (Gazette 2463/05 — effective 01 Jan 2026).
+      </p>
 
       <h3>From (your business)</h3>
       <label>Business name</label><input id="f-from-name" value="Numera 360 Private Limited" />
       <label>Address & contact</label><textarea id="f-from-addr" rows="3">502/09, Co-operative Road, Panagoda, Homagama, Sri Lanka
-hello@numera360.com · +94 71 707 1829</textarea>
+hello@numera360.com</textarea>
+      <div class="row2">
+        <div><label>Supplier TIN</label><input id="f-from-tin" value="134567890-7000" /></div>
+        <div><label>Supplier phone</label><input id="f-from-tel" value="+94 71 707 1829" /></div>
+      </div>
 
-      <h3>Bill to</h3>
+      <h3>Bill to (Purchaser)</h3>
       <label>Client name</label><input id="f-to-name" value="Client Pvt Ltd" />
       <label>Client address</label><textarea id="f-to-addr" rows="3">123 Galle Road
 Colombo 03, Sri Lanka</textarea>
+      <div class="row2">
+        <div><label>Purchaser TIN</label><input id="f-to-tin" value="" placeholder="e.g. 198765432-7000" /></div>
+        <div><label>Purchaser phone</label><input id="f-to-tel" value="" placeholder="+94 ..." /></div>
+      </div>
 
       <h3>Invoice details</h3>
       <div class="row2">
@@ -88,13 +100,32 @@ Colombo 03, Sri Lanka</textarea>
         <div><label>Due date</label><input id="f-due" type="date" /></div>
       </div>
 
+      <h3>Sri Lanka VAT fields (used by SL VAT template)</h3>
+      <div class="row2">
+        <div><label>Branch / Unit code (QQQQ)</label><input id="f-sl-branch" value="HQ01" maxlength="10" /></div>
+        <div><label>Auto serial (YYMMM_QQQQ_XXXXX)</label><input id="f-sl-serial" value="" placeholder="auto" /></div>
+      </div>
+      <div class="row2">
+        <div><label>Place of supply</label><input id="f-sl-place" value="Colombo, Sri Lanka" /></div>
+        <div><label>Date of delivery</label><input id="f-sl-deliv" type="date" /></div>
+      </div>
+      <div class="row2">
+        <div><label>Mode of payment</label>
+          <select id="f-sl-mode">
+            <option>Bank Transfer</option><option>Cash</option><option>Cheque</option>
+            <option>Credit/Debit Card</option><option>Mobile Payment</option><option>Online Payment</option>
+          </select>
+        </div>
+        <div><label>Additional information</label><input id="f-sl-extra" value="" placeholder="Optional" /></div>
+      </div>
+
       <h3>Line items</h3>
       <div id="items-wrap"></div>
       <button class="add" id="add-item">+ Add item</button>
 
       <h3>Totals</h3>
       <div class="row2">
-        <div><label>Tax / VAT %</label><input id="f-tax" type="number" value="18" step="0.01" /></div>
+        <div><label>VAT %</label><input id="f-tax" type="number" value="18" step="0.01" /></div>
         <div><label>Discount %</label><input id="f-disc" type="number" value="0" step="0.01" /></div>
       </div>
 
@@ -244,14 +275,118 @@ Colombo 03, Sri Lanka</textarea>
         </div>
         ${notes?`<div class="notes"><h4>Notes</h4>${escapeHtml(notes).replace(/\n/g,'<br/>')}</div>`:''}
       </div>`;
+    } else if(tpl==='slvat'){
+      // ---- Sri Lanka VAT Tax Invoice (IRD Gazette 2463/05) ----
+      const fromTin = $('f-from-tin').value, fromTel = $('f-from-tel').value;
+      const toTin = $('f-to-tin').value, toTel = $('f-to-tel').value;
+      const place = $('f-sl-place').value, deliv = $('f-sl-deliv').value;
+      const mode = $('f-sl-mode').value, extra = $('f-sl-extra').value;
+      const branch = ($('f-sl-branch').value||'HQ01').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,10);
+      // build serial YYMMM_QQQQ_XXXXX
+      const d = date ? new Date(date) : new Date();
+      const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      const yy = String(d.getFullYear()).slice(-2);
+      const mmm = months[d.getMonth()];
+      const xxxxx = (num.match(/\d+/g)||['1']).pop();
+      let serial = `${yy}${mmm}_${branch}_${xxxxx}`;
+      if(serial.length>40) serial = serial.slice(0,40);
+      if(!$('f-sl-serial').value) $('f-sl-serial').value = serial;
+      else serial = $('f-sl-serial').value;
+      const fmtMD = s => { if(!s) return ''; const x=new Date(s); return `${String(x.getMonth()+1).padStart(2,'0')}/${String(x.getDate()).padStart(2,'0')}/${x.getFullYear()}`; };
+      const lkrInt = n => Math.round(n||0).toLocaleString('en-LK');
+      const rowsSl = items.map((it,i)=>{
+        const total = it.qty*it.price;
+        return `<tr>
+          <td class="ref">${i+1}</td>
+          <td>${escapeHtml(it.desc)}</td>
+          <td class="qty">${it.qty}</td>
+          <td class="num">${lkrInt(it.price)}</td>
+          <td class="num">${lkrInt(total)}</td>
+        </tr>`;
+      }).join('');
+      const totWords = numberToWordsLKR(Math.round(grand));
+      html = `<div class="tpl-slvat">
+        <div class="sl-title">Tax Invoice</div>
+        <div class="sl-parties">
+          <div>
+            <h4>Supplier</h4>
+            <div class="tin">TIN: ${escapeHtml(fromTin)}</div>
+            <strong>${escapeHtml(from.name)}</strong>
+            ${escapeHtml(from.addr).replace(/\n/g,'<br/>')}
+            <br/>Tel: ${escapeHtml(fromTel)}
+          </div>
+          <div>
+            <h4>Purchaser</h4>
+            <div class="tin">TIN: ${escapeHtml(toTin||'—')}</div>
+            <strong>${escapeHtml(to.name)}</strong>
+            ${escapeHtml(to.addr).replace(/\n/g,'<br/>')}
+            <br/>Tel: ${escapeHtml(toTel||'—')}
+          </div>
+        </div>
+        <div class="sl-meta">
+          <div><strong>Tax Invoice No.:</strong> ${escapeHtml(serial)}</div>
+          <div><strong>Date of Invoice:</strong> ${fmtMD(date)}</div>
+          <div><strong>Place of Supply:</strong> ${escapeHtml(place)}</div>
+          <div><strong>Date of Delivery:</strong> ${fmtMD(deliv||date)}</div>
+          ${extra?`<div style="grid-column:1/-1;border-right:none !important;background:#fff !important"><strong>Additional Information:</strong> ${escapeHtml(extra)}</div>`:''}
+        </div>
+        <table class="sl-items">
+          <thead><tr>
+            <th style="width:60px">Reference</th>
+            <th>Description of Goods or Services</th>
+            <th style="width:70px">Quantity</th>
+            <th style="width:110px">Unit Price (LKR)</th>
+            <th style="width:140px">Amount Excl. VAT (LKR)</th>
+          </tr></thead>
+          <tbody>${rowsSl}</tbody>
+          <tfoot>
+            ${discPct?`<tr><td colspan="4" style="text-align:right">Discount (${discPct}%)</td><td class="num">−${lkrInt(disc)}</td></tr>`:''}
+            <tr><td colspan="4" style="text-align:right">Total Value of Supply</td><td class="num">${lkrInt(taxable)}</td></tr>
+            <tr><td colspan="4" style="text-align:right">VAT Amount (Total Value of Supply @ ${taxPct}%)</td><td class="num">${lkrInt(tax)}</td></tr>
+            <tr class="grand"><td colspan="4" style="text-align:right">Total Amount Including VAT</td><td class="num">${lkrInt(grand)}</td></tr>
+          </tfoot>
+        </table>
+        <div class="sl-foot">
+          <div><strong>Total Amount in Words:</strong> ${escapeHtml(totWords)} Sri Lankan Rupees Only.</div>
+          <div><strong>Mode of Payment:</strong> ${escapeHtml(mode)}</div>
+          ${notes?`<div><strong>Notes:</strong> ${escapeHtml(notes)}</div>`:''}
+        </div>
+        <div class="sl-notice">Issued under the Value Added Tax Act, No. 14 of 2002 — Gazette Extraordinary No. 2463/05 of 17.11.2025. All amounts in Sri Lankan Rupees (LKR).</div>
+      </div>`;
     }
     $('preview').innerHTML = html;
+  }
+
+  // ---- Number to words (Indian/Lankan system: lakh, crore) ----
+  function numberToWordsLKR(n){
+    if(n===0) return 'Zero';
+    if(n<0) return 'Minus '+numberToWordsLKR(-n);
+    const a=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+    const b=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+    const two = x => x<20 ? a[x] : b[Math.floor(x/10)] + (x%10 ? ' '+a[x%10] : '');
+    const three = x => {
+      let s='';
+      if(x>=100){ s += a[Math.floor(x/100)]+' Hundred'; x%=100; if(x) s+=' and '; }
+      if(x) s += two(x);
+      return s;
+    };
+    let str='';
+    const crore = Math.floor(n/10000000); n %= 10000000;
+    const lakh  = Math.floor(n/100000);   n %= 100000;
+    const thou  = Math.floor(n/1000);     n %= 1000;
+    const rest  = n;
+    if(crore) str += three(crore)+' Crore ';
+    if(lakh)  str += three(lakh)+' Lakh ';
+    if(thou)  str += three(thou)+' Thousand ';
+    if(rest)  str += three(rest);
+    return str.trim();
   }
 
   // init dates
   const today = new Date(), due = new Date(today.getTime()+14*864e5);
   $('f-date').value = today.toISOString().slice(0,10);
   $('f-due').value  = due.toISOString().slice(0,10);
+  $('f-sl-deliv').value = today.toISOString().slice(0,10);
 
   // listeners
   document.querySelectorAll('.inv-form input,.inv-form textarea,.inv-form select').forEach(el=>{
